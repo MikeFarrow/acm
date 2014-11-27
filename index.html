@@ -1,0 +1,26 @@
+<!doctype html>
+<html ng-app="app">
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>-->
+    <script src="lib/angular.js"></script>
+		<style type="text/css">
+		</style>
+	</head>
+
+	<body>
+		<div class='container'  ng-controller="defC as ca" >
+			<h1  class="page-header" >Extended controller</h1>
+
+			<div ng-repeat="item in ca.cont" dy-dir="{{item.tpl}}"></div>
+
+		</div>
+	</body>
+	<script src="scr/app.js"></script>
+	<script src="scr/defC.js"></script>
+	<script src="scr/dynD.js"></script>
+	<script src="scr/datS.js"></script>
+	<script src="scr/dlocS.js"></script>
+</html>
