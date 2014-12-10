@@ -1,0 +1,10 @@
+<h2><span ng-show='ca.curItem === 0' >Add</span> <span ng-show='ca.curItem !== 0' >Edit</span> a content item</h2>
+
+<form name="content" novalidate>	
+	<label  for="Template" class="red-copy">Template</label><br/>
+	<input type="text" ng-model="ca.tpl" name="tpl" require >
+	<br/>
+	<label  for="Content" class="red-copy">Content</label>	<br/>
+	<input type="text" ng-model="ca.cnt" require >
+	<a href='#' class='btn btn-primary btn-large' ng-click='ca.upCnt()' >Update</a>
+</form>

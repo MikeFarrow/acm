@@ -21,6 +21,7 @@ injected classes as appropiate
 
 		var service = {
 			getCnt: getCnt,
+			savCnt: savCnt,
 			setUp: setUp,
 			getTpl: getTpl
 		};
@@ -36,22 +37,16 @@ injected classes as appropiate
 
 		};
 
+		function savCnt(dat) { 
+			//console.log('In getCnt')
+			return dLocS.savCnt(dat);
+
+		};
+
 		function getCnt() { 
-console.log('In getCnt')
+			//console.log('In getCnt')
 			return dLocS.getCnt();
-			return {
-				cont:
-				[
-					{
-						label: 'item one label',
-						tpl: 'h2'
-					},
-					{
-						label:'item two label',
-						tpl: 'h3'
-					}
-				]
-			}
+
 		};
 
 		function getTpl() { 

@@ -1,0 +1,7 @@
+<h2>List content to edit</h2>
+
+<a href="#" ng-click="ca.edCnt(0)">Add an item </a>
+
+<div ng-repeat="item in ca.cont" >
+	<a href="#" ng-click="ca.edCnt(item)">{{item.label}}</a>
+</div>
