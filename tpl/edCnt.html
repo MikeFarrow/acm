@@ -2,9 +2,12 @@
 
 <form name="content" novalidate>	
 	<label  for="Template" class="red-copy">Template</label><br/>
-	<input type="text" ng-model="ca.tpl" name="tpl" require >
+	<select ng-model="ca.ctype" ng-options="item.type as item.name for item in ca.tpls"></select><br>
+	<!--<input type="text" ng-model="ca.tpl" name="tpl" require >-->
 	<br/>
 	<label  for="Content" class="red-copy">Content</label>	<br/>
-	<input type="text" ng-model="ca.cnt" require >
+	<input type="text" ng-model="ca.cnt" require rows="2">
+	<p/>
 	<a href='#' class='btn btn-primary btn-large' ng-click='ca.upCnt()' >Update</a>
+	<a ng-show='ca.curItem !== 0' href='#' class='btn btn-primary btn-large' ng-click='ca.deCnt()' >Delete</a>
 </form>

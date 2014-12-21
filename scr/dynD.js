@@ -24,7 +24,7 @@
 
 		function getTemplate (type) {
 			// Get the template which matches the current content type
-			var tpl = $filter('getByProp')('type', type, aTpl.cont);
+			var tpl = $filter('getByProp')('type', type, aTpl.tpls);
 			return tpl.tpl;
 
 		}

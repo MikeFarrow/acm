@@ -17,8 +17,12 @@ extends the controller object.
 		/* jshint validthis: true */
 		var vm = this;
 		var dat = dataS.getCnt();
+		var tpl = dataS.getTpl();
 
 		angular.extend(vm, dat);
+		angular.extend(vm, tpl);
+
+		console.log(vm);
 
 		// *** Setup
 		//dataS.setUp();
@@ -26,40 +30,64 @@ extends the controller object.
 		// Connect the handlers
 		vm.edCnt = edCnt;
 		vm.upCnt = upCnt;
+		vm.deCnt = deCnt;
 
 		/////// Implementation ///////
-		function upCnt(item) {
+
+		// Delete a content item
+		function deCnt() {
+			// Edited item
 			if (vm.curItem !== 0) {
-				vm.curItem.label = vm.cnt;
-				vm.curItem.tpl = vm.tpl;
-			} else {
-			console.log('upCntIns:')
-			console.log(item);
-			return;
-				var newItem = {};
-				newItem.label = vm.cnt;
-				newItem.tpl = vm.tpl;
-				dat.push(newItem);
+				// Delete the item from view
+				vm.cont.splice(vm.curItem.ind);
 			}
 			// Save the changes
 			dataS.savCnt(dat);
 			return;
 		}
 
-		function edCnt(item) {
+		// Update a content item
+		function upCnt() {
+			var newItem = {};
+			// Edited item
+			if (vm.curItem !== 0) {
+				vm.curItem.label = vm.cnt;
+				vm.curItem.tpl = vm.ctype;
+			} else { // Insert and added item
+				newItem.label = vm.cnt;
+				newItem.tpl = vm.ctype;
+				// Add the new
+				dat.cont.push(newItem);
+			}
+			clrCnt();
+			// Save the changes
+			dataS.savCnt(dat);
+			return;
+		}
+
+		// Prepare and show add / edit content
+		function edCnt(item, ind) {
 			// Display the edit screen and set model
 			vm.showEdCnt = true;
-			// Is it an edit or add
+			// Is it an edit
 			if(item !== 0) {
-				vm.tpl = item.tpl;
+				// Set the fields for the form
+				vm.ctype = item.tpl;
 				vm.cnt = item.label;
 				// Save the item for updating
 				vm.curItem = item;
-			} else {
-				vm.tpl = '';
-				vm.cnt = '';
-				vm.curItem = 0;
+				vm.curItem.ind = ind; // Catch the index
+			} else { // Add item
+				clrCnt()
 			}
+		}
+
+		// Clear the content screen
+		function clrCnt() {
+			vm.tpl = '';
+			vm.cnt = '';
+			vm.ctype = '';
+			vm.curItem = 0;
 		}
 
 	}

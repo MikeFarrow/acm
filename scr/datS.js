@@ -51,18 +51,21 @@ injected classes as appropiate
 
 		function getTpl() { 
 			return {
-				cont:
+				tpls:
 				[
 					{
 						type: 'h1',
+						name: 'Header 1',
 						tpl: '<h1>{{item.label}}</h1>'
 					},
 					{
 						type: 'h2',
+						name: 'Header 2',
 						tpl: '<h2>{{item.label}}</h2>'
 					},
 					{
 						type:'h3',
+						name: 'Header 3',
 						tpl: '<h3>{{item.label}}</h3>'
 					}
 				]

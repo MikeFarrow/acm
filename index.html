@@ -12,7 +12,7 @@
 
 	<body>
 		<div class='container'  ng-controller="defC as ca" >
-			<h1  class="page-header center" >ng-content-ed</h1>
+			<h1  class="page-header center" >ng-content-ed: a simple content manager</h1>
 			<div class="row">
 				<div class="col-lg-4">
 					<div ng-repeat="item in ca.cont" dy-dir="{{item.tpl}}"></div>
@@ -20,8 +20,8 @@
 
 				<div class="col-lg-4">
 					<div>
-						<a href='#' class='btn btn-primary btn-large' ng-click='showLstCnt = !showLstCnt' >Ed cont</a>
-						<a href='#' class='btn btn-primary btn-large' ng-click='edCnt()' >Ed tplt</a>
+						<a href='#' class='btn btn-primary btn-large' ng-click='showLstCnt = !showLstCnt' >Content</a>
+						<a href='#' class='btn btn-primary btn-large' ng-click='edCnt()' >Templates</a>
 					</div>
 					<div ng-show='showLstCnt' ng-include="'tpl/lstCnt.html'"></div>
 				</div>
