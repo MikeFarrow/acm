@@ -10,9 +10,9 @@ extends the controller object.
 		.module('app')
 		.controller('defC', defC);
 
-	defC.$inject = ['$scope', '$filter','dataS'];
+	defC.$inject = ['$scope', '$filter','dataS', '$localForage'];
 
-	function defC($scope, $filter, dataS) {
+	function defC($scope, $filter, dataS, $localForage) {
 
 		/* jshint validthis: true */
 		var vm = this;
@@ -20,12 +20,12 @@ extends the controller object.
 		var tpl = dataS.getTpl();
 
 		angular.extend(vm, dat);
-		angular.extend(vm, tpl);
+		//angular.extend(vm, tpl);
 
 		console.log(vm);
 
 		// *** Setup
-		//dataS.setUp();
+		//console.log(dataS.setUp());
 
 		// Connect the handlers
 		vm.edCnt = edCnt;
@@ -33,6 +33,16 @@ extends the controller object.
 		vm.deCnt = deCnt;
 
 		/////// Implementation ///////
+
+		// test local storage setup function
+		function setUp() {
+			$localForage.setItem('myName', {first:'Mike',last:'Farr'}).then(function() {
+				$localForage.getItem('myName').then(function(data) {
+					vm.myName = data;
+					//vm.myName = driver();
+				});
+			});
+		}
 
 		// Delete a content item
 		function deCnt() {

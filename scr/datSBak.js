@@ -13,15 +13,16 @@ injected classes as appropiate
 		.module('app')
 		.factory('dataS', dataS);
 
-	dataS.$inject = ['dLocS', 'datIni', '$localForage'];
+	dataS.$inject = ['dLocS'];
 
-	function dataS(dLocS, datIni, $localForage) {
+	function dataS(dLocS) {
 
 		var dat = {};
 
 		var service = {
 			getCnt: getCnt,
 			savCnt: savCnt,
+			setUp: setUp,
 			getTpl: getTpl
 		};
 
@@ -29,43 +30,21 @@ injected classes as appropiate
 
 		////////////
 
-		// Get the content
-		function getCnt() {
-			var cnt;
-			// Look up the data
-			$localForage.getItem('myCont').then(function(data) {
-				// If data found
-				if (typeof(data) !== 'undefined') {
-					// Return the data
-					cnt = data;
-			console.log('In getCnt');
-			console.log(cnt);
-				} else {
-					// Initialise the content
-					cnt = iniCnt();
-				}
-				return cnt;
-			});
-		};
+		// For persisting initial data
+		function setUp() { 
 
-		function iniCnt(dat) {
-
-			// Get the hardcoded initial data
-			var cnt = datIni.getCnt();
-			// Save it to local storage
-			savCnt(cnt);
-
-			return cnt;
+			var cnt = getCnt();
+			dLocS.savCnt(cnt);
 
 		};
 
 		function savCnt(dat) { 
-			$localForage.setItem('myCont', dat).then(function() {
-				console.log('Saved:');
-			});
+			//console.log('In getCnt')
+			return dLocS.savCnt(dat);
+
 		};
 
-		function getCntOld() { 
+		function getCnt() { 
 			//console.log('In getCnt')
 			return dLocS.getCnt();
 
@@ -96,4 +75,3 @@ injected classes as appropiate
 
 	}
 })();
-

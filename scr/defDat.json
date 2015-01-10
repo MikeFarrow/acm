@@ -1,0 +1,22 @@
+{
+	"cont":[
+	{
+		"label":"This is a content manager",
+		"tpl":"h3"
+	},
+	{
+		"label":"You can edit the content",
+		"tpl":"h3"
+	},
+	{
+		"label":"Next I have to work out how to change order",
+		"tpl":"h3"
+	},
+	{
+		"label":"and maybe paginate",
+		"tpl":"h2"
+	},{
+		"label":"New item",
+		"tpl":"h2"
+	}]
+}

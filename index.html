@@ -6,13 +6,17 @@
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>-->
     <script src="lib/angular.js"></script>
+    <script src="lib/localforage.min.js"></script>
+    <script src="lib/angular-localForage.js"></script>
 		<style type="text/css">
 		</style>
 	</head>
 
 	<body>
 		<div class='container'  ng-controller="defC as ca" >
-			<h1  class="page-header center" >ng-content-ed: a simple content manager</h1>
+			<h1  class="page-header center" >ng-content-ed: a simple content manager
+** {{ca.myName.first}} {{ca.myName.last}}
+			</h1>
 			<div class="row">
 				<div class="col-lg-4">
 					<div ng-repeat="item in ca.cont" dy-dir="{{item.tpl}}"></div>
@@ -38,4 +42,5 @@
 	<script src="scr/dynD.js"></script>
 	<script src="scr/datS.js"></script>
 	<script src="scr/dlocS.js"></script>
+	<script src="scr/datIni.js"></script>
 </html>
