@@ -25,10 +25,10 @@ It is for new instances of the content manager and creating new sites.
 		////////////
 
 
+
 		function getCnt() { 
 			//console.log('In getCnt')
-			return {
-				"cont":[
+			return [
 				{
 					"label":"This is a content manager",
 					"tpl":"h3"
@@ -44,35 +44,33 @@ It is for new instances of the content manager and creating new sites.
 				{
 					"label":"and maybe paginate",
 					"tpl":"h2"
-				},{
+				},
+				{
 					"label":"New item",
 					"tpl":"h2"
-				}]
-			}
-
+				}
+			]
 		};
 
+
 		function getTpl() { 
-			return {
-				tpls:
-				[
-					{
-						type: 'h1',
-						name: 'Header 1',
-						tpl: '<h1>{{item.label}}</h1>'
-					},
-					{
-						type: 'h2',
-						name: 'Header 2',
-						tpl: '<h2>{{item.label}}</h2>'
-					},
-					{
-						type:'h3',
-						name: 'Header 3',
-						tpl: '<h3>{{item.label}}</h3>'
-					}
-				]
-			}
+			return [
+				{
+					type: 'h1',
+					name: 'Header 1',
+					tpl: '<h1>{{item.label}}</h1>'
+				},
+				{
+					type: 'h2',
+					name: 'Header 2',
+					tpl: '<h2>{{item.label}}</h2>'
+				},
+				{
+					type:'h3',
+					name: 'Header 3',
+					tpl: '<h3>{{item.label}}</h3>'
+				}
+			]
 		};
 
 	}

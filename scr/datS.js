@@ -2,8 +2,8 @@
 mf:2014-11-26::dataS.js
 
 This class is exposed to controllers, directives and other services,
-it does not talk directly to data providers but used a set of 
-injected classes as appropiate
+it talks to the $localForage data provider library but may swapped for one 
+that provides a similar service
 
 */
 (function() {
@@ -13,16 +13,18 @@ injected classes as appropiate
 		.module('app')
 		.factory('dataS', dataS);
 
-	dataS.$inject = ['dLocS', 'datIni', '$localForage'];
+	dataS.$inject = ['datIni', '$localForage', '$q'];
 
-	function dataS(dLocS, datIni, $localForage) {
+	function dataS(datIni, $localForage, $q) {
 
 		var dat = {};
 
 		var service = {
 			getCnt: getCnt,
 			savCnt: savCnt,
-			getTpl: getTpl
+
+			getTpl: getTpl,
+			savTpl: savTpl
 		};
 
 		return service;
@@ -30,22 +32,63 @@ injected classes as appropiate
 		////////////
 
 		// Get the content
+		function getTpl() {
+			var dat = {}
+			var deferred = $q.defer();
+
+			// Look up the data
+			$localForage.getItem('myTmpl').then(function(data) {
+				// If data found
+				if (typeof(data) !== 'undefined') {
+					// Return the data
+					dat.tpls = data;
+				} else {
+					// Initialise the content
+					dat.tpls = iniTpl();
+				}
+				//console.log(deferred);
+				deferred.resolve(dat);
+			});
+			return deferred.promise;
+		};
+
+		function iniTpl() {
+
+			// Get the hardcoded initial data
+			var tpl = datIni.getTpl();
+			// Save it to local storage
+			savTpl(tpl);
+
+			return tpl;
+
+		};
+
+
+		function savTpl(dat) { 
+			$localForage.setItem('myTmpl', dat).then(function() {
+				//console.log('Saved Tpls:');
+			});
+		};
+
+		// Get the content
 		function getCnt() {
-			var cnt;
+			var dat = {}
+			var deferred = $q.defer();
+
 			// Look up the data
 			$localForage.getItem('myCont').then(function(data) {
 				// If data found
 				if (typeof(data) !== 'undefined') {
 					// Return the data
-					cnt = data;
-			console.log('In getCnt');
-			console.log(cnt);
+					dat.cont = data;
 				} else {
 					// Initialise the content
-					cnt = iniCnt();
+					dat.cont = iniCnt();
 				}
-				return cnt;
+				//console.log(deferred);
+				deferred.resolve(dat);
 			});
+			return deferred.promise;
 		};
 
 		function iniCnt(dat) {
@@ -61,37 +104,8 @@ injected classes as appropiate
 
 		function savCnt(dat) { 
 			$localForage.setItem('myCont', dat).then(function() {
-				console.log('Saved:');
+				//console.log('Saved:');
 			});
-		};
-
-		function getCntOld() { 
-			//console.log('In getCnt')
-			return dLocS.getCnt();
-
-		};
-
-		function getTpl() { 
-			return {
-				tpls:
-				[
-					{
-						type: 'h1',
-						name: 'Header 1',
-						tpl: '<h1>{{item.label}}</h1>'
-					},
-					{
-						type: 'h2',
-						name: 'Header 2',
-						tpl: '<h2>{{item.label}}</h2>'
-					},
-					{
-						type:'h3',
-						name: 'Header 3',
-						tpl: '<h3>{{item.label}}</h3>'
-					}
-				]
-			}
 		};
 
 	}

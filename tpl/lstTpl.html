@@ -1,0 +1,6 @@
+<p>template edit options:</p>
+<a href="#" ng-click="ca.edTpl(0)">Add a template</a>
+<p>Select a template to edit:</p>
+<div ng-repeat="item in ca.tpls" >
+	<a href="#" ng-click="ca.edTpl(item, $index)">{{item.name}}</a>
+</div>
