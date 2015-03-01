@@ -18,7 +18,7 @@
 
 		function linker(scope, element, attrs) {
 			// Get the template data
-			var promise = dataS.getTpl();
+			var promise = dataS.rget('tpls');
 			promise.then(
 				function(result) {
 					// Get the template and compile it

@@ -16,6 +16,7 @@ It is for new instances of the content manager and creating new sites.
 	function datIni() {
 
 		var service = {
+			get: get,
 			getCnt: getCnt,
 			getTpl: getTpl
 		};
@@ -24,36 +25,43 @@ It is for new instances of the content manager and creating new sites.
 
 		////////////
 
+		function get(root) {
+			var dat = [];
+			if (root === 'cont') dat = getCnt();
+			if (root === 'tpls') dat = getTpl();
 
-
+			return dat;
+		}
+		 
 		function getCnt() { 
 			//console.log('In getCnt')
 			return [
 				{
-					"label":"This is a content manager",
-					"tpl":"h3"
+					label: "This is a content manager",
+					tpl: "h3"
 				},
 				{
-					"label":"You can edit the content",
-					"tpl":"h3"
+					label: "You can edit the content",
+					tpl: "h3"
 				},
 				{
-					"label":"Next I have to work out how to change order",
-					"tpl":"h3"
+					label: "Next I have to work out how to change order",
+					tpl :"h3"
 				},
 				{
-					"label":"and maybe paginate",
-					"tpl":"h2"
+					label: "Implement material design",
+					tpl: "h2"
 				},
 				{
-					"label":"New item",
-					"tpl":"h2"
+					label :"Home controller and Multiple pages",
+					tpl: "h2"
 				}
 			]
 		};
 
 
 		function getTpl() { 
+			// Return initial templates
 			return [
 				{
 					type: 'h1',

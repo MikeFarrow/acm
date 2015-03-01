@@ -30,6 +30,7 @@
 					<div>
 						<a href='#' class='btn btn-primary btn-large' ng-click='ca.showPanel(1)' >Content</a>
 						<a href='#' class='btn btn-primary btn-large' ng-click='ca.showPanel(2)' >Templates</a>
+						<a href='#' class='btn btn-primary btn-large' ng-click='ca.showPanel(0)' >Hide</a>						
 					</div>
 					<div ng-show='ca.showPan == 1' ng-include="'tpl/lstCnt.html'"></div>
 					<div ng-show='ca.showPan == 2' ng-include="'tpl/lstTpl.html'"></div>
@@ -44,5 +45,6 @@
 	<script src="scr/defC.js"></script>
 	<script src="scr/dynD.js"></script>
 	<script src="scr/datS.js"></script>
+	<script src="scr/daDic.js"></script>
 	<script src="scr/datIni.js"></script>
 </html>

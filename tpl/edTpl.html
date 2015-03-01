@@ -1,4 +1,4 @@
-<h2><span ng-show='ca.curItem === 0' >Add</span> <span ng-show='ca.curItem !== 0' >Edit</span> a template</h2>
+<h2><span ng-show="ca.curItem === 0" >Add</span> <span ng-show="ca.curItem !== 0" >Edit</span> a template</h2>
 
 <form name="content" novalidate>	
 	<label  for="Template" class="red-copy">Type</label><br/>
@@ -8,8 +8,9 @@
 	<input type="text" ng-model="ca.name" require rows="2">
 	<br/>
 	<label  for="Content" class="red-copy">Template</label>	<br/>
-	<input type="text" ng-model="ca.tpl" require rows="2">
-	<p/>
-	<a href='#' class='btn btn-primary btn-large' ng-click='ca.upTpl()' >Update</a>
-	<a ng-show='ca.curItem !== 0' href='#' class='btn btn-primary btn-large' ng-click='ca.deTpl()' >Delete</a>
+	<!--<input type="text" ng-model="ca.tpl" require rows="2">-->
+	<textarea  ng-model="ca.tpl" require rows="3" cols="35"></textarea>
+	<p> </p>
+	<a href="#" class="btn btn-primary btn-large" ng-click="ca.upFrm('tpls')" >Update</a>
+	<a ng-show="false && ca.curItem !== 0" href="#" class="btn btn-primary btn-large" ng-click="ca.deTpl()" >Delete</a>
 </form>

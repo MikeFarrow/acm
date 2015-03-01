@@ -10,97 +10,82 @@ extends the controller object.
 		.module('app')
 		.controller('defC', defC);
 
-	defC.$inject = ['$scope','dataS'];
+	defC.$inject = ['$scope', 'dataS', 'daDic'];
 
-	function defC($scope, dataS) {
+	function defC($scope, dataS, daDic) {
 
 		/* jshint validthis: true */
 		var vm = this;
-		var dat = getCnt();
-		var tpl = getTpl();
+		var dat = getDat('cont');
+		var tpl = getDat('tpls');
 		//var vm.showPan;
 
 		// *** Setup
 
 		// Connect the handlers
-		vm.edTpl = edTpl;
-		vm.upTpl = upTpl;
-		vm.edCnt = edCnt;
-		vm.upCnt = upCnt;
+		vm.edFrm = edFrm;
+		vm.upFrm = upFrm;
 		vm.deCnt = deCnt;
 		vm.showPanel = showPanel;
 
 		/////// Implementation ///////
+
+		// Get the content from storage
+		function getDat(dType) {
+			var promise = dataS.rget(dType);
+			promise.then(
+				function(result) {
+					//console.log('Ext: ' + dType);
+					angular.extend(vm, result);
+				})
+		}
+
 
 		function showPanel(iPan){
 			//console.log('showPanel: ' + iPan);
 			vm.showPan = iPan;
 		}
 
-		// Update a content item
-		function upTpl() {
-			var newItem = {};
-			// Edited an item
-			if (vm.curItem !== 0) {
-				vm.curItem.type = vm.type;
-				vm.curItem.name = vm.name;
-				vm.curItem.tpl = vm.tpl;
-			} else { // Insert an added item
-				newItem.type = vm.type;
-				newItem.name = vm.name;
-				newItem.tpl = vm.tpl;
-				// Add the new
-				vm.tpls.push(newItem);
-			}
+
+		// Update the form data
+		function upFrm(fdat) {
+
+			// Save the form fields based on data dic
+			daDic.fUpd(fdat, vm);
+
 			// Save the changes
-			dataS.savTpl(vm.tpls);
-			clrTpl();
+			dataS.rsav(vm[fdat], fdat);
+
+			// Clear the form
+			cFrm(fdat);
 			showPanel(0);
 		}
 
-		// Prepare and show add / edit content
-		function edTpl(item, ind) {
+
+		// Prepare and show add / edit a form
+		function edFrm(item, ind, dfrm, fdat) {
 			// Display the edit screen and set model
-			console.log('showPanel:');
-			showPanel(4);
+			showPanel(dfrm);
 			// Is it an edit
 			if(item !== 0) {
-				// Set the fields for the form
-				vm.type = item.type;
-				vm.name = item.name;
-				vm.tpl = item.tpl;
+				// Set the form fields based on data dictionary
+				daDic.fSet(fdat, vm, item);
 				// Save the item for updating
 				vm.curItem = item;
 				vm.curItem.ind = ind; // Catch the index
 			} else { // Add item
-				clrTpl()
+				// Clear the form
+				cFrm(fdat);
 			}
 		}
 
-		// Clear the content screen
-		function clrTpl() {
-			vm.type = '';
-			vm.name = '';
-			vm.tpl = '';
+
+		// Clear a form
+		function cFrm(frm) {
+			// Clear form based on data dictionary
+			daDic.fClr(frm, vm);
+			// Reset the current item
 			vm.curItem = 0;
-		}
-
-		// Get the content from storage
-		function getTpl() {
-			var promise = dataS.getTpl();
-			promise.then(
-				function(result) {
-					angular.extend(vm, result);
-				})
-		}
-
-		// Get the content from storage
-		function getCnt() {
-			var promise = dataS.getCnt();
-			promise.then(
-				function(result) {
-					angular.extend(vm, result);
-				})
 		}
 
 
@@ -112,53 +97,10 @@ extends the controller object.
 				vm.cont.splice(vm.curItem.ind);
 			}
 			// Save the changes
-			dataS.savCnt(vm.cont);
-			clrCnt();
-		}
-
-		// Update a content item
-		function upCnt() {
-			var newItem = {};
-			// Edited item
-			if (vm.curItem !== 0) {
-				vm.curItem.label = vm.cnt;
-				vm.curItem.tpl = vm.ctype;
-			} else { // Insert and added item
-				newItem.label = vm.cnt;
-				newItem.tpl = vm.ctype;
-				// Add the new
-				vm.cont.push(newItem);
-			}
-			// Save the changes
-			dataS.savCnt(vm.cont);
-			clrCnt();
+			dataS.rsav(vm.cont, 'cont');
+			// Clear the content form
+			cFrm('cont');
 			showPanel(0);
-		}
-
-		// Prepare and show add / edit content
-		function edCnt(item, ind) {
-			// Display the edit screen and set model
-			//vm.showEdCnt = true;
-			showPanel(3);
-			// Is it an edit
-			if(item !== 0) {
-				// Set the fields for the form
-				vm.ctype = item.tpl;
-				vm.cnt = item.label;
-				// Save the item for updating
-				vm.curItem = item;
-				vm.curItem.ind = ind; // Catch the index
-			} else { // Add item
-				clrCnt()
-			}
-		}
-
-		// Clear the content screen
-		function clrCnt() {
-			vm.tpl = '';
-			vm.cnt = '';
-			vm.ctype = '';
-			vm.curItem = 0;
 		}
 
 	}
