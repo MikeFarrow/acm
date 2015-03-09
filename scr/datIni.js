@@ -16,9 +16,9 @@ It is for new instances of the content manager and creating new sites.
 	function datIni() {
 
 		var service = {
-			get: get,
+			get: get /*,
 			getCnt: getCnt,
-			getTpl: getTpl
+			getTpl: getTpl */
 		};
 
 		return service;
@@ -29,12 +29,36 @@ It is for new instances of the content manager and creating new sites.
 			var dat = [];
 			if (root === 'cont') dat = getCnt();
 			if (root === 'tpls') dat = getTpl();
+			if (root === 'pgs') dat = getPg();
 
 			return dat;
 		}
+
+
+		function getPg() { 
+			// Initialise the pages
+			return [
+				{
+					pname: 'home',
+					ptit: 'My tear it up home page',
+					pdesc: 'This may not be shown on the page'
+				},
+				{
+					pname: 'todo',
+					ptit: 'Materialeysed todo list',
+					pdesc: 'Ongoing stuff to do'
+				},
+				{
+					pname:'about',
+					ptit: 'About Materialyzed',
+					pdesc: 'About the ethos and the people'
+				}
+			]
+		};
 		 
+
 		function getCnt() { 
-			//console.log('In getCnt')
+			// Initialise the content
 			return [
 				{
 					label: "This is a content manager",

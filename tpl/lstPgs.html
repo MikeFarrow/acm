@@ -1,0 +1,6 @@
+<p>page edit options:</p>
+<a href="#" ng-click="ca.edFrm(0, 0, 'edPg','pgs')">Add a page</a>
+<p>Select a page to edit:</p>
+<div ng-repeat="item in ca.pgs" >
+	<a href="#" ng-click="ca.edFrm(item, $index, 'edPg', 'pgs')">{{item.ptit}}</a>
+</div> 

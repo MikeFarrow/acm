@@ -16,8 +16,11 @@ extends the controller object.
 
 		/* jshint validthis: true */
 		var vm = this;
+		vm.flds = []; // create an array for the form fields
+
 		var dat = getDat('cont');
 		var tpl = getDat('tpls');
+		var pgs = getDat('pgs');
 		//var vm.showPan;
 
 		// *** Setup
@@ -25,25 +28,25 @@ extends the controller object.
 		// Connect the handlers
 		vm.edFrm = edFrm;
 		vm.upFrm = upFrm;
-		vm.deCnt = deCnt;
+		vm.delFrm = delFrm;
 		vm.showPanel = showPanel;
 
 		/////// Implementation ///////
 
-		// Get the content from storage
+		// Get the data from storage
 		function getDat(dType) {
 			var promise = dataS.rget(dType);
 			promise.then(
 				function(result) {
-					//console.log('Ext: ' + dType);
+					// Add the data to the scope
 					angular.extend(vm, result);
 				})
 		}
 
 
-		function showPanel(iPan){
+		function showPanel(cPan){
 			//console.log('showPanel: ' + iPan);
-			vm.showPan = iPan;
+			vm.showPan = cPan;
 		}
 
 
@@ -62,10 +65,11 @@ extends the controller object.
 		}
 
 
-		// Prepare and show add / edit a form
+		// Prepare and show add / edit form
 		function edFrm(item, ind, dfrm, fdat) {
 			// Display the edit screen and set model
 			showPanel(dfrm);
+	console.log(item);
 			// Is it an edit
 			if(item !== 0) {
 				// Set the form fields based on data dictionary
@@ -89,17 +93,17 @@ extends the controller object.
 		}
 
 
-		// Delete a content item
-		function deCnt() {
+		// Delete a data record
+		function delFrm(fDat) {
 			// Edited item
 			if (vm.curItem !== 0) {
 				// Delete the item from view
-				vm.cont.splice(vm.curItem.ind);
+				vm[fDat].splice(vm.curItem.ind);
 			}
 			// Save the changes
-			dataS.rsav(vm.cont, 'cont');
-			// Clear the content form
-			cFrm('cont');
+			dataS.rsav(vm[fDat], fDat);
+			// Clear the form
+			cFrm(fDat);
 			showPanel(0);
 		}
 

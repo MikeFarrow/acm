@@ -2,12 +2,12 @@
 
 <form name="content" novalidate>	
 	<label  for="Template" class="red-copy">Template</label><br/>
-	<select ng-model="ca.tpl" ng-options="item.type as item.name for item in ca.tpls"></select><br>
+	<select ng-model="ca.flds.tpl" ng-options="item.type as item.name for item in ca.tpls"></select><br>
 	<!--<input type="text" ng-model="ca.tpl" name="tpl" require >-->
 	<br/>
 	<label  for="Content" class="red-copy">Content</label>	<br/>
-	<textarea  ng-model="ca.label" rows="3" cols="35"></textarea>
+	<textarea  ng-model="ca.flds.label" rows="3" cols="35"></textarea>
 	<p> </p>
 	<a href="#" class="btn btn-primary btn-large" ng-click="ca.upFrm('cont')" >Update</a>
-	<a ng-show="ca.curItem !== 0" href="#" class="btn btn-primary btn-large" ng-click="ca.deCnt()" >Delete</a>
+	<a ng-show="ca.curItem !== 0" href="#" class="btn btn-primary btn-large" ng-click="ca.delFrm('cont')" >Delete</a>
 </form>

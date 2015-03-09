@@ -22,7 +22,8 @@ that provides a similar service
 		var dat = {};
 		var stores = {
 			cont : 'myCont',
-			tpls : 'myTmpl' 
+			tpls : 'myTmpl',
+			pgs : 'myPgs' 
 		}
 
 		var service = {
@@ -48,7 +49,7 @@ that provides a similar service
 					dat[root] = data;
 				} else {
 					// Initialise the content xxxx
-					dat[root] = rini(store, root);
+					dat[root] = rini(root);
 				}
 				//console.log(deferred);
 				deferred.resolve(dat);
@@ -58,12 +59,11 @@ that provides a similar service
 
 
 		// Record initialisation
-		function rini(store, root) {
-
+		function rini(root) {
 			// Get the hardcoded initial data
 			var dat = datIni.get(root);
 			// Save it to local storage
-			rsav(dat, store);
+			rsav(dat, root);
 
 			return dat;
 		};

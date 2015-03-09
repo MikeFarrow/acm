@@ -1,6 +1,6 @@
 <p>content edit options:</p>
-<a href="#" ng-click="ca.edFrm(0,0,3,'cont')">Add an item of content</a>
+<a href="#" ng-click="ca.edFrm(0, 0, 'edCnt', 'cont')">Add an item of content</a>
 <p>Select a content item to edit:</p>
 <div ng-repeat="item in ca.cont" >
-	<a href="#" ng-click="ca.edFrm(item, $index,3,'cont')">{{item.label}}</a>
+	<a href="#" ng-click="ca.edFrm(item, $index, 'edCnt','cont')">{{item.label}}</a>
 </div>

@@ -19,7 +19,8 @@ data dictionary type definitions
 
 		var dic = {
 			tpls: ['type', 'name', 'tpl'],
-			cont: ['tpl', 'label']
+			cont: ['tpl', 'label'],
+			pgs: ['pname', 'ptit', 'pdesc']
 		};
 
 		var service = {
@@ -42,15 +43,16 @@ data dictionary type definitions
 
 				// Update edited item's field
 				if (vm.curItem !== 0) {
-					vm.curItem[dic[frm][i]] = vm[dic[frm][i]];
+					vm.curItem[dic[frm][i]] = vm.flds[dic[frm][i]];
 				} else { 
 					// Update an added item's field
-					newItem[dic[frm][i]] = vm[dic[frm][i]];
+					newItem[dic[frm][i]] = vm.flds[dic[frm][i]];
 				}
 			}
 			// If a new item push it to the data array
 			if (vm.curItem === 0) vm[frm].push(newItem);
 		};
+
 
 		// Set a form
 		function fSet(frm, vm, item) {
@@ -59,9 +61,10 @@ data dictionary type definitions
 			var i=0, len=dic[frm].length;
 			for (i; i<len; i++) {
 				// Set the fields
-				vm[dic[frm][i]] = item[dic[frm][i]];
+				vm.flds[dic[frm][i]] = item[dic[frm][i]];
 			}
 		};
+
 
 		// Clear a form
 		function fClr(frm, vm) {
@@ -70,16 +73,9 @@ data dictionary type definitions
 			var i=0, len=dic[frm].length;
 			for (i; i<len; i++) {
 				// Clear the fields
-				vm[dic[frm][i]] = '';
+				vm.flds[dic[frm][i]] = '';
 			}
 		};
-
-
-		// Record initialisation
-		function fIni(store, root) {
-
-		};
-
 
 
 	}
