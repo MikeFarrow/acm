@@ -1,0 +1,7 @@
+{
+  "name": "acm",
+  "description": "a content manager",
+  "version": "0.1.0",
+  "dependencies": {},
+  "devDependencies": {}
+}
