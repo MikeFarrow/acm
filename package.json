@@ -2,7 +2,7 @@
   "name": "acm",
   "description": "a content manager",
   "version": "0.1.0",
-  "main" : "app.js",
+  "main" : "src/app.js",
   "dependencies": {},
   "devDependencies": {}
 }
